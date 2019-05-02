@@ -1,18 +1,38 @@
 package Controller;
 
-import java.util.Arrays;
+import View.CommandLineViewer;
+import View.Viewer;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
+//TODO ask why builder is necessary
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserInputController {
+    Scanner scanner = new Scanner(System.in);
+    Viewer viewer = new CommandLineViewer();
 
     public List getUserCode(){
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter a char");
-        Character first = scanner.next().charAt(0);
-        Character sec = scanner.next().charAt(0);
-        Character third = scanner.next().charAt(0);
-        Character fourth = scanner.next().charAt(0);
-        return Arrays.asList(first, sec, third,fourth);
+        viewer.displayTextToUser("Enter 4 letters:");
+        String input = scanner.nextLine().toUpperCase();
+        //TODO check for invalid input
+//        Character first = input.charAt(0);
+//        Character sec = input.charAt(1);
+//        Character third = input.charAt(2);
+//        Character fourth = input.charAt(3);
+        //return Arrays.asList(first, sec, third,fourth);
+        return input
+                .chars()
+                .mapToObj(c -> (char) c)
+                .collect(Collectors.toList());
     }
 }

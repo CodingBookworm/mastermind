@@ -15,13 +15,14 @@ import static org.mockito.Mockito.verify;
 public class GameServiceTest {
 
     @Mock
-    Viewer view;
+    Viewer viewer;
 
     @Mock
     CodeService gameCodeService;
 
     @InjectMocks
     GameService gameService;
+
 
     @Test
     public void setCodeCallsCodeService(){

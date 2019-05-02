@@ -16,13 +16,12 @@ public class UserInputControllerTest {
 
     @InjectMocks
             UserInputController userInputController;
-//
-//    Scanner sc = new Scanner(System.in);
+
 
     @Test
     public void scannerReturnsListOfValues(){
-//        when(scannerMock.next().charAt(0))
-//                .thenReturn('A','B','C','D');
+//        when(scannerMock.nextLine())
+//                .thenReturn("ABCD");
         assertThat(userInputController.getUserCode(), is(equalTo(Arrays.asList('A','B','C','D'))));
     }
 
