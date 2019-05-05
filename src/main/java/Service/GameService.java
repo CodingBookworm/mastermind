@@ -1,7 +1,7 @@
-package Controller;
+package Service;
 
+import Controller.UserInputController;
 import Model.Board;
-import Model.CodeService;
 import View.CommandLineViewer;
 import View.Viewer;
 import lombok.AllArgsConstructor;
@@ -9,6 +9,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -33,20 +34,21 @@ public class GameService {
 
         while (guessNo < 20) {
             userGuess = userInputController.getUserCode();
-            matches = codeService.findSimilaritiesBetween(gameCode, userGuess);
-            userGuess.addAll(matches);
-            rows.add(userGuess);
             if (userGuess.equals(gameCode)){
                 winner = true;
                 break;
             }
+            matches = codeService.findSimilaritiesBetween(gameCode, userGuess);
+            List<Character> newRow = new ArrayList<>(userGuess);
+            newRow.addAll(matches);
+            rows.add(newRow);
+
             viewer.displayGame(board);
             guessNo++;
         }
 
         if (winner){
-            viewer.clearView();
-            viewer.displayWin();
+            viewer.displayWin(guessNo);
         }else {
             viewer.displayLose();
         }

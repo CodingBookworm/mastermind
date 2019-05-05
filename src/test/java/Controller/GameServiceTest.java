@@ -1,6 +1,7 @@
 package Controller;
 
-import Model.CodeService;
+import Service.CodeService;
+import Service.GameService;
 import View.Viewer;
 import org.junit.Test;
 import org.junit.runner.RunWith;

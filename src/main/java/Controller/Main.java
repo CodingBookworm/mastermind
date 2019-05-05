@@ -1,4 +1,6 @@
-import Controller.GameService;
+package Controller;
+
+import Service.GameService;
 
 public class Main {
 

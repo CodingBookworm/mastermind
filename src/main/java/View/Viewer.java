@@ -7,6 +7,6 @@ public interface Viewer {
     void displayTextToUser(String message);
     void displayGame(Board board);
     void clearView();
-    void displayWin();
+    void displayWin(int guesses);
     void displayLose();
 }

@@ -1,4 +1,4 @@
-package Model;
+package Service;
 
 import Controller.UserInputController;
 import lombok.AllArgsConstructor;
@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 @Data
@@ -30,16 +29,28 @@ public class CodeService {
     }
 
     public List findSimilaritiesBetween(List<Character> gameCode, List<Character> userGuess) {
-        List matches = new ArrayList();
-        Integer place = 0;
-        for (Character c: userGuess){
-            if (c.equals(gameCode.get(place++))){
-                matches.add('*');
-            }else if (gameCode.contains(c)){
-                matches.add('^');
+        List<Character> notExactMatches = new ArrayList();
+        List<Character> remainingGuess = new ArrayList();
+        List results = new ArrayList();
+
+        //TODO fix for duplicates
+        for (int i = 0; i < 4; i++) {
+            if (userGuess.get(i).equals(gameCode.get(i))){
+                results.add('*');
+            }else{
+                notExactMatches.add(gameCode.get(i));
+                remainingGuess.add(userGuess.get(i));
             }
         }
-        Collections.shuffle(matches);
-        return matches;
+        for (Character c: remainingGuess) {
+            if (notExactMatches.contains(c)) {
+                results.add('^');
+                notExactMatches.remove(c);
+            }
+        }
+//        for (int i = results.size(); i < 4; i++) {
+//            results.add(' ');
+//        }
+        return results;
     }
 }

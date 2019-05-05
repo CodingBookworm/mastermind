@@ -1,5 +1,6 @@
 package Model;
 
+import Service.CodeService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -43,13 +44,19 @@ public class CodeServiceTest {
     }
 
     @Test
-    public void matchesGetsScrambled(){
-        //note: in a rare case, this won't pass
-        // as the values will scramble to same places
-        List<Character> gameCode = Arrays.asList('A','B','E','D');
-        List<Character> userGuess = Arrays.asList('A','B','D','C');
+    public void duplicatesInCodeDontReturnTwice(){
+        List<Character> gameCode = Arrays.asList('A','B','B','D');
+        List<Character> userGuess = Arrays.asList('A','E','B','C');
         List matches = codeService.findSimilaritiesBetween(gameCode,userGuess);
-        assertNotEquals(Arrays.asList('*','*','^'),matches);
+        assertEquals(Arrays.asList('*','*',' ',' '),matches);
+    }
+
+    @Test
+    public void duplicatesInGuessDontReturnTwice(){
+        List<Character> gameCode = Arrays.asList('A','E','B','D');
+        List<Character> userGuess = Arrays.asList('A','B','B','C');
+        List matches = codeService.findSimilaritiesBetween(gameCode,userGuess);
+        assertEquals(Arrays.asList('*','*',' ',' '),matches);
     }
 
 

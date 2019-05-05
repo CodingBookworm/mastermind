@@ -24,7 +24,7 @@ public class CommandLineViewer implements Viewer {
                 System.out.print(c+" ");
             }
             System.out.println();
-//            System.out.printf("%c %c %c %c      %c %c %c %c\n",
+//            System.out.printf("%c %c %c %c   %c %c %c %c\n",
 //                    row.get(0), row.get(1), row.get(2), row.get(3), //letters
 //                    row.get(4), row.get(5), row.get(6), row.get(7) //symbols
 //            );
@@ -44,14 +44,16 @@ public class CommandLineViewer implements Viewer {
     }
 
     @Override
-    public void displayWin() {
-        System.out.println("YOU WON!!");
+    public void displayWin(int guesses) {
+        displayTextToUser("YOU WON!!");
+        displayTextToUser("Guesses used: "+ guesses);
+
 
     }
 
     @Override
     public void displayLose() {
-        System.out.println("YOU LOST!");
+        System.out.println("YOU LOST :(");
 
     }
 
