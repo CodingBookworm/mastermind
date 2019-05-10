@@ -2,6 +2,7 @@ package Service;
 
 import Controller.UserInputController;
 import Model.Board;
+import Model.GameSettings;
 import View.CommandLineViewer;
 import View.Viewer;
 import lombok.AllArgsConstructor;
@@ -22,8 +23,8 @@ public class GameService {
     Viewer viewer = new CommandLineViewer();
     UserInputController userInputController = new UserInputController();
 
-    public void playGame(){
-        List<Character> gameCode = codeService.setCode("secret demo");
+    public boolean playRound(GameSettings gameSettings, int currentPlayer){
+        List<Character> gameCode = codeService.setCode(gameSettings, currentPlayer);
         List matches;
         List userGuess;
         int guessNo =0;
@@ -33,7 +34,7 @@ public class GameService {
 
 
         while (guessNo < 20) {
-            userGuess = userInputController.getUserCode();
+            userGuess = userInputController.getUserCode(gameSettings.getDuplicatesAllowed());
             if (userGuess.equals(gameCode)){
                 winner = true;
                 break;
@@ -43,18 +44,19 @@ public class GameService {
             newRow.addAll(matches);
             rows.add(newRow);
 
-            viewer.displayGame(board);
+            viewer.displayBoard(board);
             guessNo++;
         }
 
         if (winner){
             viewer.displayWin(guessNo);
-        }else {
-            viewer.displayLose();
+            return true;
         }
+        viewer.displayLose();
+        return false;
+
 
 
 
     }
-
 }

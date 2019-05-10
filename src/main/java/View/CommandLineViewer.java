@@ -7,7 +7,10 @@ import java.util.List;
 public class CommandLineViewer implements Viewer {
     @Override
     public void displayStart() {
-
+        displayTextToUser("Welcome to MasterMind! The goal of the game is to guess the code.\n"+
+                "The code will be 4 letters. The possible choices are ABCDEF.\n"+
+                "If a letter is guessed in the right spot, the computer will show a *.\n"+
+                "If a letter is in the code, but was not in the right spot, the computer will show a ^.\n");
     }
 
     @Override
@@ -17,7 +20,7 @@ public class CommandLineViewer implements Viewer {
 
 
     @Override
-    public void displayGame(Board board) {
+    public void displayBoard(Board board) {
         clearView();
         for (List<Character> row : board.getRows()){
             for (char c: row){
@@ -34,7 +37,6 @@ public class CommandLineViewer implements Viewer {
 
     @Override
     public void clearView() {
-        //TODO figure out how to clear window console
         StringBuilder line = new StringBuilder();
         for (int i = 0; i < 25; i++) {
             line.append("\n");

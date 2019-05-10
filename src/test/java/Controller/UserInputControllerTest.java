@@ -15,7 +15,7 @@ import static org.junit.Assert.assertThat;
 public class UserInputControllerTest {
 
     @InjectMocks
-            UserInputController userInputController;
+    UserInputController userInputController;
 
 
     @Test
